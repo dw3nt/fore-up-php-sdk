@@ -4,40 +4,40 @@ namespace Dw3nt\ForeUpSdk\Objects;
 
 class Customer extends AbstractObject
 {
-    private $userFields = [
+    private $customerFields = [
         'username', 'company_name', 'taxable', 'discount', 'opt_out_email', 'opt_out_text', 'date_created'
     ];
-    private $contactInfoFields = [
+    private $contactFields = [
         'id', 'first_name', 'last_name', 'phone_number', 'cell_phone_number', 'email', 'birthday', 'address_1', 'address_2', 'city', 'state', 'zip', 'country', 'handicap_account_number', 'handicap_score', 'comments'
     ];
 
-    public function create($courseId, $userData, $contactData) 
+    public function create($courseId, $customerData, $contactData) 
     {
-        $userData = $this->sanitizeUserData($userData);
+        $customerData = $this->sanitizeCustomerData($customerData);
         $contactData = $this->sanitizeContactData($contactData);
 
-        $userData['contact_info'] = $contactData;
+        $customerData['contact_info'] = $contactData;
 
         $url = "courses/{$courseId}/customers";
         $response = $this->client->request('POST', $url, [
             'form_params' => [
                 'data' => [
                     'type' => 'customer',
-                    'attributes' => $userData
+                    'attributes' => $customerData
                 ]
             ]
         ]);
         return $response;
     }
 
-    private function sanitizeUserData($userData) 
+    private function sanitizeCustomerData($customerData) 
     {
-        return $this->sanitizeDataByKeys($this->userFields, $userData);
+        return $this->sanitizeDataByKeys($this->customerFields, $customerData);
     }
 
     private function sanitizeContactData($contactData)
     {
-        return $this->sanitizeDataByKeys($this->contactInfoFields, $contactData);
+        return $this->sanitizeDataByKeys($this->contactFields, $contactData);
     }
 
     private function sanitizeDataByKeys($keys, $data)
