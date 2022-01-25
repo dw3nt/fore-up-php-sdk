@@ -44,10 +44,15 @@ class ForeUp
         return json_decode($response->getBody(), true);
     }
 
+    public function customers() 
+    {
+        return new \Dw3nt\ForeUpSdk\Objects\Customer($this);
+    }
+
     public function request($method, $uri, $params = []) 
     {
         $client = $this->getHttpClient();
-        return $client->request($method, $uri, $params);
+        return $client->request($method, $this->baseUri . $uri, $params);
     }
 
     public function getSdkEnv($key = "") 
