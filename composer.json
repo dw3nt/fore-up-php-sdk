@@ -1,0 +1,19 @@
+{
+    "name": "dw3nt/fore-up-sdk",
+    "description": "PHP SDK for ForeUp API",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dw3nt\\ForeUpSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Richard Simon",
+            "email": "rick.fr.simon@gmail.com"
+        }
+    ]
+}
